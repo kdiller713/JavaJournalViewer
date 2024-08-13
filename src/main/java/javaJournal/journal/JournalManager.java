@@ -17,7 +17,7 @@ import java.util.stream.IntStream;
 
 public class JournalManager {
     public static JournalManager parseJournalFolder(String journalFolder) throws IOException {
-        File[] journalFiles = new File(journalFolder).listFiles((dir, name) -> name.endsWith(".journal"));
+        File[] journalFiles = new File(journalFolder).listFiles((dir, name) -> name.endsWith(".journal") || name.endsWith(".journal~"));
         
         if(journalFiles == null || journalFiles.length == 0){
             throw new IOException("Failed to find any journal files");

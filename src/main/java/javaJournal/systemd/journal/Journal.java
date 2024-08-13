@@ -57,6 +57,7 @@ public class Journal extends KaitaiStruct {
         this._root = _root == null ? this : _root;
         _read();
     }
+    
     private void _read() {
         this._raw_header = this._io.readBytes(lenHeader());
         KaitaiStream _io__raw_header = new ByteBufferKaitaiStream(_raw_header);
