@@ -212,7 +212,7 @@ public class MainFrame extends JFrame {
         
         return "<tr>" +
                "<td><nobr>" + e.date() + "</td>" +
-               "<td><nobr>" + e.service() + "[" + e.pid() + "," + e.priority() + "]</td>" +
+               "<td><nobr>" + e.exe() + "[" + e.pid() + "," + e.priority() + "," + e.service() + "]</td>" +
                "<td style=\"" + messageStyle + "\"><nobr>" + message + "</td></tr>";
     }
 }

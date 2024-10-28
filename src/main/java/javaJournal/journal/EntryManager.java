@@ -15,6 +15,7 @@ public class EntryManager {
     private String hostname = "";
     private String message;
     private String service = "kernel";
+    private String exe = "kernel";
     private int priority = PriorityLevel.values().length - 1;
     private int pid;
     
@@ -27,7 +28,17 @@ public class EntryManager {
             if(payload.startsWith("_HOSTNAME=")) {
                 hostname = payload.split("=", 2)[1];
             }else if(payload.startsWith("_COMM=")) {
+                exe = payload.split("=", 2)[1];
+            }else if(payload.startsWith("_SYSTEMD_UNIT=")) {
                 service = payload.split("=", 2)[1];
+                
+                // Strip out the .service and parameterized part of the service name
+                int end = service.indexOf(".");
+                if(service.contains("@")) {
+                    end = service.indexOf("@");
+                }
+                
+                service = service.substring(0, end);
             }else if(payload.startsWith("MESSAGE=")) {
                 message = payload.split("=", 2)[1];
             }else if(payload.startsWith("_PID=")) {
@@ -43,6 +54,7 @@ public class EntryManager {
     public String message() { return message; }
     public String hostname() { return hostname; }
     public String service() { return service; }
+    public String exe() { return exe; }
     public int pid() { return pid; }
     public int priority() { return priority; }
     
